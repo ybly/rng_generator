@@ -3,11 +3,23 @@ import random
 def rng_picker(lowerLimit, upperLimit, amount):
     min_num = min(lowerLimit, upperLimit)
     max_num = max(lowerLimit, upperLimit)
+    
     if max_num - min_num + 1 < amount:
         print("Error: The range of numbers is smaller than the amount of numbers to generate.")
         return []
+    
     random_numbers = random.sample(range(min_num, max_num + 1), amount)
+
     return random_numbers
+
+
+def printRandomNumbers(lowerLimit, upperLimit, amount):
+        random_numbers = rng_picker(lowerLimit, upperLimit, amount)
+        
+        print("=======================================================")
+        print(f"Results: {random_numbers}")
+        print("=======================================================")
+
 
 def main():
     while True:
@@ -21,14 +33,17 @@ def main():
             print("Please enter two different numbers!")
             return
         
-        random_numbers = rng_picker(lowerLimit, upperLimit, amount)
+        printRandomNumbers(lowerLimit, upperLimit, amount)
         
-        print("=======================================================")
-        print(f"Results: {random_numbers}")
-        print("=======================================================")
+        runAgain = input("--> Generate another set of numbers with current range? (yes/no): ").lower()
+
+        if runAgain == "yes" or runAgain == 'y':
+            while runAgain == 'yes' or runAgain == 'y':
+                printRandomNumbers(lowerLimit, upperLimit, amount)
+                runAgain = input("--> Generate another set of numbers with current range? (yes/no): ").lower()
         
-        quit = input("Do you want to quit? (yes/no): ").lower()
-        if quit == 'yes':
+        exitProgram = input("--> Do you want to exit? (yes/no): ").lower()
+        if exitProgram == 'yes' or exitProgram == 'y':
             break
 
         print("\n")
